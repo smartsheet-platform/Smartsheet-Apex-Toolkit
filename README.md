@@ -89,8 +89,4 @@ We encourage community development on this library, and welcome any high quality
 The Smartsheet Platform team
 
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/2767edac14b600e7d2463c462d047d5e "githalytics.com")](http://githalytics.com/smartsheet-platform/Smartsheet-Opportunity-Pipeline-for-Salesforce)
-
-
-
-
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/7b122c2a7e23b4e0fda2ce7bcb2b5d07 "githalytics.com")](http://githalytics.com/smartsheet-platform/Smartsheet-Apex-Toolkit) 
