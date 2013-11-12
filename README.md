@@ -68,6 +68,20 @@ Interacting with the Smartsheet API requires a new remote site setting.
 - Create new remote site and set `https://api.smartsheet.com` in the Remote Site URL.
 
 
+##Force.com IDE Setup
+The cleanest way to include the toolkit in a Force.com IDE project is to have the IDE download the package when creating a new project.
+
+The Force.com IDE can be found here:
+
+[http://wiki.developerforce.com/page/Force.com_IDE](http://wiki.developerforce.com/page/Force.com_IDE)
+
+To download the toolkit into a new project open the IDE and go to `File` -> `New…` -> `Force.com project`.
+
+Connect the project to your Salesforce account with your Salesforce username, password and Salesforce security token. Then, click Next.
+
+In the Choose Initial Project Contents window there will be an option to Choose metadata components to download. Under that option select Contents of Package, and then choose Smartsheet Apex Toolkit from the dropdown. 
+
+The package contents will then be loaded into Force.com IDE project.
 
 
 ## Toolkit Demo VF page
