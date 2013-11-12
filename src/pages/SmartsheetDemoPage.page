@@ -1,0 +1,146 @@
+<!-- 
+****************************************************************************
+    Copyright 2013 Smartsheet, Inc.
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+    http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and       
+    limitations under the License.             
+*****************************************************************************
+ -->
+<apex:page controller="SmartsheetDemoController" action="{!oauthTarget}">
+
+    <apex:sectionHeader title="Smartsheet Toolkit" subtitle="Smartsheet Toolkit Demo"/>
+
+    <apex:outputPanel id="msg">
+        <apex:pageMessages />
+    </apex:outputPanel>
+  
+    <apex:form >
+        <apex:pageBlock title="Authorization Demo">
+
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!authorize}" value="Login to Smartsheet"/>
+                <apex:commandButton action="{!deleteToken}" value="Delete Token"/>
+            </apex:pageBlockButtons>
+      
+            <apex:pageBlockSection columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Authorization Type"/>
+                    <apex:selectList value="{!authType}" size="1">
+                        <apex:selectOptions value="{!authTypeList}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Generated Token" for="tokenInput"/>
+                    <apex:inputText value="{!generatedToken}" id="tokenInput"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Access Token" for="tokenOutput"/>
+                    <apex:outputText id="tokenOutput" rendered="{!token!=null}" value="{!token}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+
+
+        <apex:pageBlock title="API Operation Demo" mode="edit" id="operationDemo">
+
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!invokeApi}" value="Execute API"/>
+            </apex:pageBlockButtons>
+     
+            <apex:pageBlockSection columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="API Operation"/>
+                    <apex:selectList value="{!apiMethod}" size="1">
+                        <apex:selectOptions value="{!apiMethodList}"/>
+                        <apex:actionSupport event="onchange" rerender="operationDemo"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection columns="1" id="sheetlist" rendered="{!sheets!=null}" title="Sheet List">
+                <apex:pageBlockTable value="{!sheets}" var="s">
+                    <apex:column value="{!s.id}">
+                        <apex:facet name="header">Sheet Id</apex:facet>
+                    </apex:column>
+                    <apex:column value="{!s.name}">
+                        <apex:facet name="header">Sheet Name</apex:facet>
+                    </apex:column>
+                    <apex:column value="{!s.accessLevel}">
+                        <apex:facet name="header">Access Level</apex:facet>
+                    </apex:column>
+                    <apex:column >
+                        <apex:commandLink value="Select Sheet" action="{!invokeApi}" rerender="operationDemo">
+                            <apex:param name="sheetId" value="{!s.id}" assignTo="{!sheetId}"/>
+                            <apex:param name="apiMethod" value="GetSheet" assignTo="{!apiMethod}"/>
+                        </apex:commandLink>
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection columns="{!sheet.columns.size}" id="sheet" rendered="{!sheet!=null && apiMethod!='CreateSheet'}" 
+                    title="Selected Sheet: {!sheet.name}">
+                <apex:repeat value="{!sheet.columns}" var="col">
+                    <apex:outputText value="{!col.title}"/>
+                </apex:repeat>
+                <apex:repeat value="{!sheet.rows}" var="row">
+                    <apex:repeat value="{!row.cells}" var="cell">
+                        <apex:outputText value="{!cell.displayValue}"/>
+                    </apex:repeat>
+                </apex:repeat>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection columns="2" id="createsheet" rendered="{!apiMethod=='CreateSheet'}" title="Create New Sheet">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Sheet Name" for="sheetName"/>
+                    <apex:inputText value="{!newSheet.name}" id="sheetName"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value=""/>
+                    <apex:outputText value=""/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Column Name"/>
+                    <apex:outputText value="Column Type"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Column Name"/>
+                    <apex:outputText value="Column Type"/>
+                </apex:pageBlockSectionItem>
+                <apex:repeat value="{!newSheet.columns}" var="col">
+                    <apex:pageBlockSectionItem >
+                        <apex:inputText value="{!col.title}"/>
+                    <apex:selectList value="{!col.type}" size="1">
+                        <apex:selectOptions value="{!columnTypeList}"/>
+                    </apex:selectList>
+                    </apex:pageBlockSectionItem>    
+                </apex:repeat>
+                
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection columns="{!sheet.columns.size}" id="insertrows" 
+                rendered="{!sheet!=null && apiMethod=='InsertRows'}" title="Insert Rows to {!sheet.name}">
+                <apex:repeat value="{!sheet.columns}" var="col">
+                    <apex:outputText value="{!col.title}"/>
+                </apex:repeat>
+                <apex:repeat value="{!insertRows.rows}" var="row">
+                    <apex:repeat value="{!row.cells}" var="cell">
+                        <apex:inputText value="{!cell.value}"/>
+                    </apex:repeat>
+                </apex:repeat>
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+
+    </apex:form>
+</apex:page>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Smartsheet Apex Toolkit</fullName>
+    <description>An Apex class library that interacts with the Smartsheet API, including an Apex object model and convenience methods for calling the API.</description>
+    <types>
+        <members>HttpClient</members>
+        <members>Smartsheet</members>
+        <members>SmartsheetApi</members>
+        <members>SmartsheetDemoController</members>
+        <members>SmartsheetException</members>
+        <members>TestHelper</members>
+        <members>Test_HttpClient</members>
+        <members>Test_SmartsheetApi</members>
+        <members>Test_SmartsheetDemoController</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>SmartsheetDemoPage</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>Smartsheet_Config__c.API_Base_URL__c</members>
+        <members>Smartsheet_Config__c.API_Version__c</members>
+        <members>Smartsheet_Config__c.Authorize_URL__c</members>
+        <members>Smartsheet_Config__c.Client_Id__c</members>
+        <members>Smartsheet_Config__c.Client_Secret__c</members>
+        <members>Smartsheet_Config__c.Redirect_URL__c</members>
+        <members>Smartsheet_Config__c.Scope__c</members>
+        <members>User.Access_Token__c</members>
+        <members>User.OAuth_State__c</members>
+        <members>User.Refresh_Token__c</members>
+        <members>User.Token_Expires__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>Smartsheet_Config__c</members>
+        <name>CustomObject</name>
+    </types>
+    <version>28.0</version>
+</Package>
