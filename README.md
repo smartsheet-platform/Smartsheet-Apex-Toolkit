@@ -57,9 +57,9 @@ Create a List custom setting for organizational defaults in the Setup->Develop->
 * API_Version = 1.1
 * Authorize_URL = https://www.smartsheet.com/b/authorize
 * Scope = READ_SHEETS,WRITE_SHEETS,CREATE_SHEETS 
-* Redirect_URL = <your-redirect-url>
-* Client_Id = <your-smartsheet-client-id>
-* Client_Secret = <your-smartsheet-secret>
+* Redirect_URL = your-redirect-url
+* Client_Id = your-smartsheet-client-id
+* Client_Secret = your-smartsheet-secret
 
 #### Add Remote Site
 Interacting with the Smartsheet API requires a new remote site setting.
