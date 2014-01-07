@@ -11,10 +11,25 @@ For more information about the Smartsheet API, please visit [http://www.smartshe
 1.0 - November 12, 2013 - Basic authentication and sheet actions coverage.
 
 ## Usage
-You can create a Sheet as follows: 
+You can create a Sheet with a couple of columns as follows: 
 	
-	Smartsheet.Sheet sheet = new Smartsheet.Sheet()
-	sheet.name = "My Sheet Name"
+	Smartsheet.Sheet sheet = new Smartsheet.Sheet();
+	sheet.name = 'My Sheet Name';
+	
+	List<Smartsheet.Column> columns = new List<Smartsheet.Column>();
+	Integer numberOfColumns = 2;
+
+	for (Integer i = 0; i < numberOfColumns; i++) {
+		Smartsheet.Column column = new Smartsheet.Column();
+		
+	    if (i == 0) {
+			column.primary = true;
+	   	}			
+	    column.type = 'TEXT_NUMBER';
+	    column.title = 'Column ' + i;
+	    columns.add(column);
+	}
+	sheet.columns = columns;
 
 
 ## Current API Coverage
